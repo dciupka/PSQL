@@ -1,0 +1,128 @@
+TYPOWE COMENDSY W PSQL:
+komentarz oznaczamy -- lub /*wybieranie z tabeli */
+
+-------- SELECT ------------------------------------------------------------------------------------------------------------------------------------------
+Zaznacz wszystkow w tabeli customers:
+SELECT * FROM customers
+
+
+Wybieranie z danej tabeli:
+SELECT name, age,salary 
+FROM customers
+LIMIT 3 OFFSET 3;   -- wyswietla 3 rekordy od 3 (offset wzgledem 0 wiesza)
+
+
+Wybranie z tabeli wieków które sie nie powtarzaja:
+SELECT DISTINCT age
+FROM customers;
+
+
+Warunkek WHRERE:
+SELECT * FROM customers
+WHERE salary >8000;
+
+
+FETCH: pobiera tylko pierewsze 4 wierze
+SELECT * FROM customers
+FETCH FIRST 4 ROWS ONLY;
+
+
+-------- SORTOWANIE ------------------------------------------------------------------------------------------------------------------------------------------
+/*ORDER BY */
+SELECT * FROM customers 
+ORDER BY name
+
+
+/*ORDER BY */
+SELECT * FROM customers 
+ORDER BY salary, name --posortuje po name jezeli placa jest taka sama
+
+
+/*ORDER BY COLUMN */
+SELECT * FROM customers 
+ORDER BY 5, 2;   -- sorowanie po kolumnach
+
+
+/*DESC*/
+SELECT * FROM customers 
+ORDER BY salary DESC;   -- sorowanie po salary malejąco od najwiekszej do najmniejszej
+
+
+/*ASC*/
+SELECT * FROM customers 
+ORDER BY salary ASC;   -- sorowanie po salary rosnąco
+
+
+-------- FILTROWANIE ------------------------------------------------------------------------------------------------------------------------------------------
+/*WHERE*/
+SELECT * FROM customers 
+WHERE salary = 10600;
+
+
+/*WHERE*/
+SELECT * FROM customers 
+WHERE name = 'Dawid';    -- wielkosc liter ma znaczneie, dodatkowo string w '' nie w ""
+
+
+/*WHERE zawsze przed ORDER BY*/
+SELECT * FROM customers 
+WHERE age<24    -- dla wieku ponizej 24 lat
+ORDER BY salary; -- uporzadkuj asc   
+
+
+++++++OPERATORY WHERE++++++
+= równy
+<> różny 
+!= rózny
+< mniejszy
+<= mniejsz bądź równy
+!< nie mniejszy od
+!> nie wiekszy od
+BETWEEN między dwoma podanymi wartościami
+IS NULL jest to warość NULL
+
+
+/*BETWEEN*/
+SELECT * FROM customers 
+WHERE salary BETWEEN 3000 AND 8000;
+
+
+/*IS NULL*/
+SELECT * FROM customers 
+WHERE salary IS NULL;
+
+-------- ZAAWANSOWANE FILTROWANIE --------------------------------------------------------------------------------------------------------------------------
+
+/*ŁACZENIE WHERE  AND*/
+SELECT * FROM customers 
+WHERE salary > 8000 AND name ='Dawid'; -- moźe byc wiecej andow 
+
+
+/*or*/
+SELECT * FROM customers 
+WHERE salary > 8000 OR name ='Dawid';
+
+
+/*or and */
+SELECT * FROM customers 
+WHERE (name='Dupa' OR name ='Dawid') AND salary<6000;  -- kolenosc wykonywania obliczen AND przed OR
+
+
+/*IN*/
+SELECT * FROM customers 
+WHERE name IN ('Dawid','Dupa')  -- to samo co OR
+ORDER BY name
+
+
+/*NOT*/
+SELECT * FROM customers 
+WHERE NOT name='Dawid'
+ORDER BY name
+
+
+-------- FILTORWANIE ZA POMOCA ZNAKOW WIELOZANCZIKOWYCH -------------------------------------------------------------------------------------------------------
+
+
+
+
+
