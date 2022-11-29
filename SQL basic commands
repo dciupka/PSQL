@@ -122,7 +122,22 @@ ORDER BY name
 
 -------- FILTORWANIE ZA POMOCA ZNAKOW WIELOZANCZIKOWYCH -------------------------------------------------------------------------------------------------------
 
+/* LIKE */
+SELECT * FROM customers
+WHERE name LIKE 'Dawid';
+
+/* LIKE */
+SELECT * FROM customers
+WHERE personal_info LIKE 'jest%' --rekordy zaczynajace sie od słowa
+
+/* LIKE */
+SELECT * FROM customers
+WHERE personal_info LIKE '%jest%' --rekordy zawierajace słowo 
 
 
 
 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO customers(id,name,age, address,salary)
+VALUES(12,'Marian',49,'Gdynia',13000)
