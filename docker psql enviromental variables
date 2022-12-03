@@ -1,0 +1,7 @@
+For docker run, and the forthcoming Docker Compose sections, you need to either set a password with the environment variable:
+
+POSTGRES_PASSWORD=mypasswd
+
+Or tell it to ignore passwords with the environment variable:
+
+POSTGRES_HOST_AUTH_METHOD=trust
