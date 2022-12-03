@@ -134,8 +134,107 @@ WHERE personal_info LIKE 'jest%' --rekordy zaczynajace sie od słowa
 SELECT * FROM customers
 WHERE personal_info LIKE '%jest%' --rekordy zawierajace słowo 
 
+-------- TWORZENIE PÓL OBLICZALNYCH -------------------------------------------------------------------------------------------------------------------------
 
 
+/*KONKATENACJA DWÓCH PÓL || lub + */
+SELECT name || '('||address||')'
+FROM customers
+
+/* usuwanie zbednych spacji z prawej strony wartosci; inne opcje LTRIM i TRIM */
+SELECT RTRIM(name) || ' ('||address||')'
+FROM customers
+ORDER BY address
+
+/* dodanie nazwy stworzonej kolumny */
+SELECT RTRIM(name) || ' ('||address||')' AS name_address
+FROM customers
+ORDER BY address
+
+-------- OBLICZENIA MATEMATYCZNE ----------------------------------------------------------------------------------------------------------------------------
+
+
+SELECT name,
+		age,
+		salary, 
+		salary*age as salary_age
+	
+FROM customers
+ORDER BY salary_age DESC
+
+/*data  */
+SELECT name,
+		age,
+		salary, 
+		salary*age as salary_age,
+		CURRENT_DATE as date
+FROM customers
+ORDER BY salary_age DESC
+
+
+-------- FUNKCJE --------------------------------------------------------------------------------------------------------------------------------------------
+
+/* upper() */
+SELECT UPPER(name) FROM customers
+ORDER BY name
+
+/* SUBSTRING() */
+SELECT name,
+	SUBSTRING('Dawid' from name) AS name1 
+FROM customers
+ORDER BY name
+https://www.w3resource.com/PostgreSQL/substring-function.php
+
+/* LENGTH() */
+SELECT name,
+	LENGTH(name) AS length_name
+FROM customers
+ORDER BY name
+
+/* LOWER() */
+SELECT name,
+	LOWER(name) AS l_name
+FROM customers
+ORDER BY name
+
+
+/* DATE_PART */
+SELECT name FROM customers
+WHERE DATA_PART('year',data_wpisu)=2022;
+/* DATE_PART ta sama funkcja tyle ze z between*/
+SELECT name FROM customers
+WHERE data_wpisu BETWEEN to_date('2022-01-01', 'yyyy-mm-dd')
+AND to_date('2022-12-31','yyyy-mm-dd');
+
+
+/* DATE_PART */
+SELECT name FROM customers
+WHERE DATE_PART('month',data_wpisu)=09;
+
+
+/*zadanie z loginem dwie pierwsze imiwnia i miasta 3 pierwsze zaki)*/
+SELECT name,
+	   address,
+	   UPPER(SUBSTRING(name,1,2)||SUBSTRING(address,1,3)) 	-- zwraca znaki od 1 do 3	
+FROM customers
+
+-------- FUNKCJE AGREGJACE--------------------------------------------------------------------------------------------------------------------------------------
+
+/* MAX() */
+SELECT MAX(salary) FROM customers
+WHERE address = 'Wroclaw'
+
+
+/* COUNT() */
+SELECT COUNT(*) FROM customers
+
+
+/* Łączenie funkcji */
+SELECT COUNT(*) AS liczba_elementow,
+	MIN(salary) AS min_salary,
+	MAX(salary) AS max_salary,
+	AVG(salary) AS avg_salary
+FROM customers
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
