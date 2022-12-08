@@ -244,6 +244,35 @@ SELECT COUNT(*) AS liczba_elementow,
 FROM customers
 
 
+-------- GRUPOWANIR DANCH--------------------------------------------------------------------------------------------------------------------------------------
+/*GROUP BY */
+SELECT name, COUNT(*) AS liczba_prod
+FROM customers
+WHERE salary>10000
+GROUP BY name
+
+/*GROUP BY */
+SELECT age,name, COUNT(*) AS liczba_prod
+FROM customers
+WHERE salary>10000
+GROUP BY age, name
+
+/*GROUP BY */
+SELECT age,name, COUNT(*) AS liczba_prod
+FROM customers
+WHERE salary>100
+GROUP BY age,name  --ilu dawidów w tym samym wieku zarabia wiecej niz 100
+
+/*GROUP BY */
+SELECT name, COUNT(*) AS liczba_prod
+FROM customers
+WHERE salary>100 -- grupowane są wszystkie wiersze które zawieają powyzej 100 
+GROUP BY name 
+HAVING COUNT(*)>=2 -- WHERE by tutaj nie zadziałało, bo filtruje wiersze a HAVING fitruje grupy
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+
 INSERT INTO customers(id,name,age, address,salary)
 VALUES(12,'Marian',49,'Gdynia',13000)
